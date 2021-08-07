@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "inflection": "^1.13.1"
+  }
+}
