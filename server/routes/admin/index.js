@@ -59,4 +59,21 @@ module.exports = app => {
     req.Model = require(`../../modules/${moduleName}`);
     next();
   }, router);
+
+  /**
+   * * 文件上传 
+   * * 需要中间件: multer
+   * 0. 引入中间件
+   * 1. 设置文件上传存储路径
+  */
+  const multer = require('multer');
+  const upload = multer({
+    dest: __dirname + '../../uploads'
+  });
+  app.post('/admin/api/upload', upload.single('file'), async (req, res, next) => {
+    const file = req.file;
+    file.url = `http://localhost:3000/uploads/${file.filename}`
+    res.send(file);
+  });
+
 }
